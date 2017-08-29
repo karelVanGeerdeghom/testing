@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Validators list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Description</th>
+                <th>Identifier</th>
+                <th>Id</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for validator in validators %}
+            <tr>
+                <td><a href="{{ path('validator_show', { 'id': validator.id }) }}">{{ validator.description }}</a></td>
+                <td>{{ validator.identifier }}</td>
+                <td>{{ validator.id }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('validator_show', { 'id': validator.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('validator_edit', { 'id': validator.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('validator_new') }}">Create a new validator</a>
+        </li>
+    </ul>
+{% endblock %}

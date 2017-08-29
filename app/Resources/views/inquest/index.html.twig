@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Inquests list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Description</th>
+                <th>Url</th>
+                <th>Id</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for inquest in inquests %}
+            <tr>
+                <td><a href="{{ path('inquest_show', { 'id': inquest.id }) }}">{{ inquest.description }}</a></td>
+                <td>{{ inquest.url }}</td>
+                <td>{{ inquest.id }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('inquest_show', { 'id': inquest.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('inquest_edit', { 'id': inquest.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('inquest_new') }}">Create a new inquest</a>
+        </li>
+    </ul>
+{% endblock %}
