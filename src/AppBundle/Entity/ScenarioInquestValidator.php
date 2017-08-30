@@ -161,4 +161,3 @@ class ScenarioInquestValidator
         return $this->scenarioInquest;
     }
 }
-
