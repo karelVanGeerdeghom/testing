@@ -22,6 +22,7 @@ class ScenarioType extends AbstractType
     {
         $builder->add('description')
                 ->add('site', EntityType::class, [
+                    'placeholder' => 'Choose a site',
                     'required' => false,
                     'class' => 'AppBundle\Entity\Site'
                 ]);

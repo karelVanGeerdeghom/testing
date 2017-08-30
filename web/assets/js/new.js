@@ -1,5 +1,14 @@
 (function($) {
+	function makeSortable() {
+		console.log('ier');
+		$('.appbundle_scenario_scenarioInquests_wrapper').sortable();
+	}
+
 	$(document).ready(function() {
+		var buttonGroup = '<div class="btn-group pull-right">' +
+								'<a href="#" class="btn btn-default delete"><span class="glyphicon glyphicon-trash"></a>' +
+								'<a href="#" class="btn btn-default minimize"><span class="glyphicon glyphicon-chevron-up"></a>' +
+							'</div>';
 		var $site = $('#appbundle_scenario_site');
 
 		$site.change(function() {
@@ -27,17 +36,15 @@
 		});
 
 		$(document).on('click', '.add-scenario-inquest', function(event) {
-			var $buttonGroup = $('<div class="btn-group pull-right">' +
-									'<a href="#" class="btn btn-default delete"><span class="glyphicon glyphicon-trash"></a>' +
-									'<a href="#" class="btn btn-default minimize"><span class="glyphicon glyphicon-chevron-up"></a>' +
-								'</div>');
+			var now = parseInt(Date.now());
+			var scenarioInquest = $(this).parent().prev().data('prototype')
+									.replace(/scenarioInquests___name__/g, 'scenarioInquests_' + now)
+									.replace(/\[scenarioInquests\]\[__name__\]/g, '[scenarioInquests][' + now + ']');
 
-			var scenarioInquest = $('#appbundle_scenario_scenarioInquests').data('prototype').replace(/scenarioInquests___name__/g, 'scenarioInquests-' + Date.now());
 			var $scenarioInquest = $(scenarioInquest).addClass('scenario-inquest').addClass('well').addClass('row');
 			$scenarioInquest.children('label').remove();
 			$scenarioInquest.prepend($('<h4>Scenario Inquest</h4>'));
-			$scenarioInquest.children('div').addClass('form-wrapper');
-			$scenarioInquest.prepend($buttonGroup);
+			$scenarioInquest.prepend($(buttonGroup));
 
 			$scenarioInquest
 				.find('.scenario-inquest-validators')
@@ -47,27 +54,27 @@
 
 			$(this).parent()
 					.next()
-					.append($scenarioInquest);
+					.append($scenarioInquest)
+					.sortable();
 
 			event.preventDefault();
 		});
 
 		$(document).on('click', '.add-scenario-inquest-validator', function(event) {
-			var $buttonGroup = $('<div class="btn-group pull-right">' +
-									'<a href="#" class="btn btn-default delete"><span class="glyphicon glyphicon-trash"></a>' +
-									'<a href="#" class="btn btn-default minimize"><span class="glyphicon glyphicon-chevron-up"></a>' +
-								'</div>');
+			var now = parseInt(Date.now());
+			var scenarioInquestValidator = $(this).parent().prev().data('prototype')
+											.replace(/scenarioInquestValidators___name__/g, 'scenarioInquestValidators_' + now)
+											.replace(/\[scenarioInquestValidators\]\[__name__\]/g, '[scenarioInquestValidators][' + now + ']');
 
-			var scenarioInquestValidator = $('.scenario-inquest-validators').data('prototype').replace(/scenarioInquestValidators___name__/g, 'scenarioInquestValidators-' + Date.now());
 			var $scenarioInquestValidator = $(scenarioInquestValidator).addClass('scenario-inquest-validator').addClass('well').addClass('row');
 			$scenarioInquestValidator.children('label').remove();
 			$scenarioInquestValidator.prepend($('<h4>Scenario Inquest Validator</h4>'));
-			$scenarioInquestValidator.children('div').addClass('form-wrapper');
-			$scenarioInquestValidator.prepend($buttonGroup);
+			$scenarioInquestValidator.prepend($(buttonGroup));
 
 			$(this).parent()
 					.next()
-					.append($scenarioInquestValidator);
+					.append($scenarioInquestValidator)
+					.sortable();
 
 			event.preventDefault();
 		});

@@ -63,7 +63,7 @@ class ScenarioInquest
     private $scenario;
 
     /**
-     * @ORM\OneToMany(targetEntity="ScenarioInquestValidator", mappedBy="scenarioInquest", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="ScenarioInquestValidator", mappedBy="scenarioInquest", cascade={"persist"}, fetch="EAGER")
      */
     private $scenarioInquestValidators;
 

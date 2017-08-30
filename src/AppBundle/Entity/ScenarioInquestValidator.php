@@ -14,11 +14,15 @@ class ScenarioInquestValidator
 {
     /**
      * @var string
+     *
+     * @ORM\Column(name="validator_parameter", type="string", length=255, nullable=true)
      */
     private $validatorParameter;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="validator_comparison", type="string", length=255, nullable=true)
      */
     private $validatorComparison;
 

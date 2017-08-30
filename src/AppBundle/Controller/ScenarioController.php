@@ -47,6 +47,12 @@ class ScenarioController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            // foreach ($scenario->getScenarioInquests() as $scenarioInquest) {
+            //     $em->persist($scenarioInquest);
+            //     foreach ($scenarioInquest->getScenarioInquestValidators() as $scenarioInquestValidator) {
+            //         $em->persist($scenarioInquestValidator);
+            //     }
+            // }
             $em->persist($scenario);
             $em->flush();
 

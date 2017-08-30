@@ -15,6 +15,7 @@ class ScenarioInquestValidatorType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('validator', EntityType::class, [
+                    'placeholder' => 'Choose a validator',
                     'required' => true,
                     'class' => 'AppBundle\Entity\Validator'
                 ])

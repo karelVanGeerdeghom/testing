@@ -18,6 +18,7 @@ class ScenarioInquestType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('inquest', EntityType::class, [
+                    'placeholder' => 'Choose an inquest',
                     'class' => 'AppBundle\Entity\Inquest',
                     'required' => true,
                     'query_builder' => function(EntityRepository $entityRepository) {
