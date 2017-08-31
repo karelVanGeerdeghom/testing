@@ -36,6 +36,13 @@ class ScenarioInquest
     /**
      * @var integer
      *
+     * @ORM\Column(name="inquest_sortorder", type="integer", nullable=false)
+     */
+    private $inquestSortorder;
+
+    /**
+     * @var integer
+     *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
@@ -155,6 +162,30 @@ class ScenarioInquest
     public function getInquestComparison()
     {
         return $this->inquestComparison;
+    }
+
+    /**
+     * Set inquestSortorder
+     *
+     * @param integer $inquestSortorder
+     *
+     * @return ScenarioInquest
+     */
+    public function setInquestSortorder($inquestSortorder)
+    {
+        $this->inquestSortorder = $inquestSortorder;
+
+        return $this;
+    }
+
+    /**
+     * Get inquestSortorder
+     *
+     * @return integer
+     */
+    public function getInquestSortorder()
+    {
+        return $this->inquestSortorder;
     }
 
     /**

@@ -29,6 +29,13 @@ class ScenarioInquestValidator
     /**
      * @var integer
      *
+     * @ORM\Column(name="validator_sortorder", type="integer", nullable=false)
+     */
+    private $validatorSortorder;
+
+    /**
+     * @var integer
+     *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
@@ -111,6 +118,30 @@ class ScenarioInquestValidator
     public function getValidatorComparison()
     {
         return $this->validatorComparison;
+    }
+
+    /**
+     * Set validatorSortorder
+     *
+     * @param integer $validatorSortorder
+     *
+     * @return ScenarioInquestValidator
+     */
+    public function setValidatorSortorder($validatorSortorder)
+    {
+        $this->validatorSortorder = $validatorSortorder;
+
+        return $this;
+    }
+
+    /**
+     * Get validatorSortorder
+     *
+     * @return integer
+     */
+    public function getValidatorSortorder()
+    {
+        return $this->validatorSortorder;
     }
 
     /**

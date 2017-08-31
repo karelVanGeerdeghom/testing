@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\ScenarioInquestValidator" table="scenario_inquest_validator">
+    <indexes>
+      <index name="scenario_inquest_id" columns="scenario_inquest_id"/>
+      <index name="validator_id" columns="validator_id"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="validatorParameter" type="string" column="validator_parameter" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="validatorComparison" type="string" column="validator_comparison" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="validatorSortorder" type="integer" column="validator_sortorder" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <many-to-one field="scenarioInquest" target-entity="ScenarioInquest" fetch="LAZY">
+      <join-columns>
+        <join-column name="scenario_inquest_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="validator" target-entity="Validator" fetch="LAZY">
+      <join-columns>
+        <join-column name="validator_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

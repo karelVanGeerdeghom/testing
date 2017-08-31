@@ -4,6 +4,8 @@ namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
@@ -19,8 +21,21 @@ class ScenarioInquestValidatorType extends AbstractType
                     'required' => true,
                     'class' => 'AppBundle\Entity\Validator'
                 ])
-                ->add('validatorParameter')
-                ->add('validatorComparison');
+                ->add('validatorParameter', TextType::class, [
+                    'required' => false,
+                    'label' => 'Parameter'
+                ])
+                ->add('validatorComparison', TextType::class, [
+                    'required' => false,
+                    'label' => 'Comparison'
+                ])
+                ->add('validatorSortorder', HiddenType::class, [
+                    'required' => true,
+                    'label' => 'Sortorder',
+                    'attr' => [
+                        'class' => 'scenario-inquest-validator-sortorder',
+                    ]
+                ]);
     }
     
     /**
