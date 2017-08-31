@@ -39,7 +39,7 @@ class Scenario
     private $site;
 
     /**
-     * @ORM\OneToMany(targetEntity="ScenarioInquest", mappedBy="scenario", cascade={"persist"}, fetch="EAGER")
+     * @ORM\OneToMany(targetEntity="ScenarioInquest", mappedBy="scenario", cascade={"persist"})
      */
     private $scenarioInquests;
 

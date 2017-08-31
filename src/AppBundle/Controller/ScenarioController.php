@@ -3,10 +3,11 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Scenario;
-use AppBundle\Entity\ScenarioInquest;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Criteria;
 
 /**
  * Scenario controller.
@@ -89,11 +90,42 @@ class ScenarioController extends Controller
      */
     public function editAction(Request $request, Scenario $scenario)
     {
+        $originalScenarioInquests = new ArrayCollection();
+        $originalScenarioInquestValidators = [];
+        foreach ($scenario->getScenarioInquests() as $scenarioInquest) {
+            $originalScenarioInquests->add($scenarioInquest);
+
+            $originalScenarioInquestValidators[$scenarioInquest->getId()] = new ArrayCollection();
+            foreach ($scenarioInquest->getScenarioInquestValidators() as $scenarioInquestValidator) {
+                $originalScenarioInquestValidators[$scenarioInquest->getId()]->add($scenarioInquestValidator);
+            }
+        }
+
         $deleteForm = $this->createDeleteForm($scenario);
         $editForm = $this->createForm('AppBundle\Form\ScenarioType', $scenario);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+            foreach ($originalScenarioInquests as $originalScenarioInquest) {
+                if (!$scenario->getScenarioInquests()->contains($originalScenarioInquest)) {
+                    $this->getDoctrine()->getManager()->remove($originalScenarioInquest);
+
+                    foreach ($originalScenarioInquestValidators[$originalScenarioInquest->getId()] as $originalScenarioInquestValidator) {
+                        $this->getDoctrine()->getManager()->remove($originalScenarioInquestValidator);
+                    }
+                } else {
+                    foreach ($originalScenarioInquestValidators[$originalScenarioInquest->getId()] as $originalScenarioInquestValidator) {
+                        $criteria = Criteria::create()->where(Criteria::expr()->eq('id', $originalScenarioInquest->getId()));
+                        $currentScenarioInquest = $scenario->getScenarioInquests()->matching($criteria)->first();
+                        
+                        if (!$currentScenarioInquest->getScenarioInquestValidators()->contains($originalScenarioInquestValidator)) {
+                            $this->getDoctrine()->getManager()->remove($originalScenarioInquestValidator);
+                        }
+                    }
+                }
+            }
+
+
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('scenario_edit', array('id' => $scenario->getId()));

@@ -5,6 +5,7 @@ namespace AppBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -28,8 +29,13 @@ class ScenarioInquestType extends AbstractType
                                 ->setParameter('site', 2);
                     }
                 ])
-                ->add('inquestProtocol', TextType::class, [
-                    'label' => 'Protocol'
+                ->add('inquestProtocol', ChoiceType::class, [
+                    'label' => 'Protocol',
+                    'choices' => [
+                        'POST' => 'POST',
+                        'GET' => 'GET'
+                    ],
+                    'required' => true
                 ])
                 ->add('inquestParameter', TextType::class, [
                     'required' => false,

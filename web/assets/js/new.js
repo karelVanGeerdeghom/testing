@@ -1,6 +1,5 @@
 (function($) {
 	function makeSortable() {
-		console.log('ier');
 		$('.appbundle_scenario_scenarioInquests_wrapper').sortable();
 	}
 
