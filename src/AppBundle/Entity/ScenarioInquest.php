@@ -36,7 +36,7 @@ class ScenarioInquest
     /**
      * @var integer
      *
-     * @ORM\Column(name="inquest_sortorder", type="integer", nullable=false)
+     * @ORM\Column(name="inquest_sortorder", type="integer", nullable=true)
      */
     private $inquestSortorder;
 

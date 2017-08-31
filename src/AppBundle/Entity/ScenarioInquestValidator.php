@@ -29,7 +29,7 @@ class ScenarioInquestValidator
     /**
      * @var integer
      *
-     * @ORM\Column(name="validator_sortorder", type="integer", nullable=false)
+     * @ORM\Column(name="validator_sortorder", type="integer", nullable=true)
      */
     private $validatorSortorder;
 
