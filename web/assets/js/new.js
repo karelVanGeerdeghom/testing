@@ -56,6 +56,12 @@
 					.append($scenarioInquest)
 					.sortable();
 
+			// var i = 0;
+			// $(this).parent().next().find('.scenario-inquest-sortorder').each(function() {
+			// 	i++;
+			// 	$(this).val(i);
+			// });
+
 			event.preventDefault();
 		});
 
@@ -74,6 +80,12 @@
 					.next()
 					.append($scenarioInquestValidator)
 					.sortable();
+
+			// var i = 0;
+			// $(this).parent().next().find('.scenario-inquest-validator-sortorder').each(function() {
+			// 	i++;
+			// 	$(this).val(i);
+			// });
 
 			event.preventDefault();
 		});

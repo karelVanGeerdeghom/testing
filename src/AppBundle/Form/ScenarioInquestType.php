@@ -5,6 +5,7 @@ namespace AppBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -44,6 +45,13 @@ class ScenarioInquestType extends AbstractType
                 ->add('inquestComparison', TextType::class, [
                     'required' => false,
                     'label' => 'Comparison'
+                ])
+                ->add('inquestSortorder', HiddenType::class, [
+                    'required' => true,
+                    'label' => 'Sortorder',
+                    'attr' => [
+                        'class' => 'scenario-inquest-sortorder',
+                    ]
                 ])
                 ->add('scenarioInquestValidators', CollectionType::class, [
                     'label' => 'Validators',
