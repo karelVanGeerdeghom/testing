@@ -19,7 +19,10 @@ class ScenarioInquestValidatorType extends AbstractType
         $builder->add('validator', EntityType::class, [
                     'placeholder' => 'Choose a validator',
                     'required' => true,
-                    'class' => 'AppBundle\Entity\Validator'
+                    'class' => 'AppBundle\Entity\Validator',
+                    'attr' => [
+                        'class' => 'scenario-inquest-validator-dropdown',
+                    ]
                 ])
                 ->add('validatorParameter', TextType::class, [
                     'required' => false,

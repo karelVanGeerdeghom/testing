@@ -29,7 +29,7 @@ class ScenarioInquestValidator
     /**
      * @var integer
      *
-     * @ORM\Column(name="validator_sortorder", type="integer", nullable=true)
+     * @ORM\Column(name="validator_sortorder", type="integer", nullable=false)
      */
     private $validatorSortorder;
 
@@ -59,6 +59,7 @@ class ScenarioInquestValidator
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="scenario_inquest_id", referencedColumnName="id")
      * })
+     * @ORM\OrderBy({"validator_sortorder" = "ASC"})
      */
     private $scenarioInquest;
 

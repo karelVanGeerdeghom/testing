@@ -48,12 +48,6 @@ class ScenarioController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            // foreach ($scenario->getScenarioInquests() as $scenarioInquest) {
-            //     $em->persist($scenarioInquest);
-            //     foreach ($scenarioInquest->getScenarioInquestValidators() as $scenarioInquestValidator) {
-            //         $em->persist($scenarioInquestValidator);
-            //     }
-            // }
             $em->persist($scenario);
             $em->flush();
 
@@ -106,12 +100,14 @@ class ScenarioController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+
             foreach ($originalScenarioInquests as $originalScenarioInquest) {
                 if (!$scenario->getScenarioInquests()->contains($originalScenarioInquest)) {
-                    $this->getDoctrine()->getManager()->remove($originalScenarioInquest);
+                    $em->remove($originalScenarioInquest);
 
                     foreach ($originalScenarioInquestValidators[$originalScenarioInquest->getId()] as $originalScenarioInquestValidator) {
-                        $this->getDoctrine()->getManager()->remove($originalScenarioInquestValidator);
+                        $em->remove($originalScenarioInquestValidator);
                     }
                 } else {
                     foreach ($originalScenarioInquestValidators[$originalScenarioInquest->getId()] as $originalScenarioInquestValidator) {
@@ -119,14 +115,13 @@ class ScenarioController extends Controller
                         $currentScenarioInquest = $scenario->getScenarioInquests()->matching($criteria)->first();
                         
                         if (!$currentScenarioInquest->getScenarioInquestValidators()->contains($originalScenarioInquestValidator)) {
-                            $this->getDoctrine()->getManager()->remove($originalScenarioInquestValidator);
+                            $em->remove($originalScenarioInquestValidator);
                         }
                     }
                 }
             }
 
-
-            $this->getDoctrine()->getManager()->flush();
+            $em->flush();
 
             return $this->redirectToRoute('scenario_edit', array('id' => $scenario->getId()));
         }

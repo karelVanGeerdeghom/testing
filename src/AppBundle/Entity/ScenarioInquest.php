@@ -36,7 +36,7 @@ class ScenarioInquest
     /**
      * @var integer
      *
-     * @ORM\Column(name="inquest_sortorder", type="integer", nullable=true)
+     * @ORM\Column(name="inquest_sortorder", type="integer", nullable=false)
      */
     private $inquestSortorder;
 
@@ -66,11 +66,13 @@ class ScenarioInquest
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="scenario_id", referencedColumnName="id")
      * })
+     * @ORM\OrderBy({"inquest_sortorder" = "ASC"})
      */
     private $scenario;
 
     /**
      * @ORM\OneToMany(targetEntity="ScenarioInquestValidator", mappedBy="scenarioInquest", cascade={"persist"})
+     * @ORM\OrderBy({"validatorSortorder" = "ASC"})
      */
     private $scenarioInquestValidators;
 
