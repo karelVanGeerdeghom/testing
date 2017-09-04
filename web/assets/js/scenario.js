@@ -62,13 +62,17 @@
 		});
 
 		$(document).on('click', '.add-scenario-inquest', function(event) {
-			var now = 0;//parseInt(Date.now());
+			var now = parseInt(Date.now());
 			var scenarioInquest = $(this).parent().prev().data('prototype')
 									.replace(/scenarioInquests___name__/g, 'scenarioInquests_' + now)
 									.replace(/\[scenarioInquests\]\[__name__\]/g, '[scenarioInquests][' + now + ']');
 
-			var $scenarioInquest = $(scenarioInquest).addClass('scenario-inquest').addClass('well').addClass('row');
-			$scenarioInquest.children('label').remove();
+			var $scenarioInquest = $(scenarioInquest);
+			if ($scenarioInquest.attr('id') === undefined) {
+				$scenarioInquest = $scenarioInquest.children('div');
+			}
+
+			$scenarioInquest = $('<div class="form-group well row">').append($scenarioInquest);
 			$scenarioInquest.prepend($('<h4><small>Scenario Inquest</small> <span></span></h4>'));
 			$scenarioInquest.prepend($(buttonGroup));
 
@@ -89,7 +93,7 @@
 		});
 
 		$(document).on('click', '.add-scenario-inquest-validator', function(event) {
-			var now = 0;//parseInt(Date.now());
+			var now = parseInt(Date.now());
 			var scenarioInquestValidator = $(this).parent().prev().data('prototype')
 											.replace(/scenarioInquestValidators___name__/g, 'scenarioInquestValidators_' + now)
 											.replace(/\[scenarioInquestValidators\]\[__name__\]/g, '[scenarioInquestValidators][' + now + ']');
@@ -134,7 +138,6 @@
 		});
 
 		$(document).on('change', '.scenario-inquest-dropdown, .scenario-inquest-validator-dropdown', function() {
-			console.log('ier');
 			var choice = $(this).val() ? $(this).find(':selected').html() : '';
 			$(this).parent().parent().prev('h4').children('span').css('display', 'none').html(choice);
 		});

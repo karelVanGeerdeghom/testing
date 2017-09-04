@@ -6,83 +6,88 @@
     {{ form_start(edit_form) }}
         {{ form_row(edit_form.description) }}
         {{ form_row(edit_form.site) }}
-        <div class="form-group">
-            {{ form_label(edit_form.scenarioInquests) }}
-            <div id="appbundle_scenario_scenarioInquests" data-prototype="{{ form_widget(edit_form.scenarioInquests.vars.prototype)|e('html_attr') }}"></div>
-            <div class="col-md-1">
-                <a href="#" class="btn btn-default add-scenario-inquest" title="Add Scenario Inquest"><span class="glyphicon glyphicon-plus-sign"></span></a>
-            </div>
-            <div class="col-md-11 appbundle_scenario_scenarioInquests_wrapper sortable-wrapper">
-                {% for scenarioInquest in edit_form.scenarioInquests %}
-                    <div class="form-group scenario-inquest well row">
-                        <div class="btn-group pull-right">
-                            <a href="#" class="btn btn-default delete"><span class="glyphicon glyphicon-trash"></span></a>
-                            <a href="#" class="btn btn-default maximize"><span class="glyphicon glyphicon-chevron-down"></span></a>
-                        </div>
-                        <h4><small>Scenario Inquest</small> <span>{{ scenarioInquest.vars.value.inquest }}</span></h4>
-                        <div id="{{ scenarioInquest.vars.id }}" style="display: none;">
-                            <div class="form-group">
-                                {{ form_label(scenarioInquest.inquest) }}
-                                {{ form_widget(scenarioInquest.inquest) }}
-                                {{ form_errors(scenarioInquest.inquest) }}
+
+        {% if edit_form.scenarioInquests is defined %}
+            <div class="form-group">
+                {{ form_label(edit_form.scenarioInquests) }}
+                <div id="appbundle_scenario_scenarioInquests" data-prototype="{{ form_widget(edit_form.scenarioInquests.vars.prototype)|e('html_attr') }}"></div>
+                <div class="col-md-1">
+                    <a href="#" class="btn btn-default add-scenario-inquest" title="Add Scenario Inquest"><span class="glyphicon glyphicon-plus-sign"></span></a>
+                </div>
+                <div class="col-md-11 appbundle_scenario_scenarioInquests_wrapper sortable-wrapper">
+                    {% for scenarioInquest in edit_form.scenarioInquests %}
+                        <div class="form-group scenario-inquest well row">
+                            <div class="btn-group pull-right">
+                                <a href="#" class="btn btn-default delete"><span class="glyphicon glyphicon-trash"></span></a>
+                                <a href="#" class="btn btn-default maximize"><span class="glyphicon glyphicon-chevron-down"></span></a>
                             </div>
-                            <div class="form-group">
-                                {{ form_label(scenarioInquest.inquestProtocol) }}
-                                {{ form_widget(scenarioInquest.inquestProtocol) }}
-                                {{ form_errors(scenarioInquest.inquestProtocol) }}
-                            </div>
-                            <div class="form-group">
-                                {{ form_label(scenarioInquest.inquestParameter) }}
-                                {{ form_widget(scenarioInquest.inquestParameter) }}
-                                {{ form_errors(scenarioInquest.inquestParameter) }}
-                            </div>
-                            <div class="form-group">
-                                {{ form_label(scenarioInquest.inquestComparison) }}
-                                {{ form_widget(scenarioInquest.inquestComparison) }}
-                                {{ form_errors(scenarioInquest.inquestComparison) }}
-                            </div>
-                            {{ form_row(scenarioInquest.inquestSortorder) }}
-                            <div class="form-group">
-                                {{ form_label(scenarioInquest.scenarioInquestValidators) }}
-                                <div id="{{ scenarioInquest.scenarioInquestValidators.vars.id }}" data-prototype="{{ form_widget(scenarioInquest.scenarioInquestValidators.vars.prototype)|e('html_attr') }}"></div>
-                                <div class="col-md-1">
-                                    <a href="#" class="btn btn-default add-scenario-inquest-validator" title="Add Scenario Inquest Validator"><span class="glyphicon glyphicon-plus-sign"></span></a>
+                            <h4><small>Scenario Inquest</small> <span>{{ scenarioInquest.vars.value.inquest }}</span></h4>
+                            <div id="{{ scenarioInquest.vars.id }}" style="display: none;">
+                                <div class="form-group">
+                                    {{ form_label(scenarioInquest.inquest) }}
+                                    {{ form_widget(scenarioInquest.inquest) }}
+                                    {{ form_errors(scenarioInquest.inquest) }}
                                 </div>
-                                <div class="col-md-11 appbundle_scenario_scenarioInquestValidators_wrapper sortable-wrapper">
-                                    {% for scenarioInquestValidator in scenarioInquest.scenarioInquestValidators %}
-                                        <div class="form-group scenario-inquest well row">
-                                            <div class="btn-group pull-right">
-                                                <a href="#" class="btn btn-default delete"><span class="glyphicon glyphicon-trash"></span></a>
-                                                <a href="#" class="btn btn-default maximize"><span class="glyphicon glyphicon-chevron-down"></span></a>
-                                            </div>
-                                            <h4><small>Scenario Inquest Validator</small> <span>{{ scenarioInquestValidator.vars.value.validator }}</span></h4>
-                                            <div id="{{ scenarioInquestValidator.vars.id }}" style="display: none;">
-                                                <div class="form-group">
-                                                    {{ form_label(scenarioInquestValidator.validator) }}
-                                                    {{ form_widget(scenarioInquestValidator.validator) }}
-                                                    {{ form_errors(scenarioInquestValidator.validator) }}
-                                                </div>
-                                                <div class="form-group">
-                                                    {{ form_label(scenarioInquestValidator.validatorParameter) }}
-                                                    {{ form_widget(scenarioInquestValidator.validatorParameter) }}
-                                                    {{ form_errors(scenarioInquestValidator.validatorParameter) }}
-                                                </div>
-                                                <div class="form-group">
-                                                    {{ form_label(scenarioInquestValidator.validatorComparison) }}
-                                                    {{ form_widget(scenarioInquestValidator.validatorComparison) }}
-                                                    {{ form_errors(scenarioInquestValidator.validatorComparison) }}
-                                                </div>
-                                                {{ form_row(scenarioInquestValidator.validatorSortorder) }}
-                                            </div>
+                                <div class="form-group">
+                                    {{ form_label(scenarioInquest.inquestProtocol) }}
+                                    {{ form_widget(scenarioInquest.inquestProtocol) }}
+                                    {{ form_errors(scenarioInquest.inquestProtocol) }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form_label(scenarioInquest.inquestParameter) }}
+                                    {{ form_widget(scenarioInquest.inquestParameter) }}
+                                    {{ form_errors(scenarioInquest.inquestParameter) }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form_label(scenarioInquest.inquestComparison) }}
+                                    {{ form_widget(scenarioInquest.inquestComparison) }}
+                                    {{ form_errors(scenarioInquest.inquestComparison) }}
+                                </div>
+                                {{ form_row(scenarioInquest.inquestSortorder) }}
+                                {% if scenarioInquest.scenarioInquestValidators is defined %}
+                                    <div class="form-group">
+                                        {{ form_label(scenarioInquest.scenarioInquestValidators) }}
+                                        <div id="{{ scenarioInquest.scenarioInquestValidators.vars.id }}" data-prototype="{{ form_widget(scenarioInquest.scenarioInquestValidators.vars.prototype)|e('html_attr') }}"></div>
+                                        <div class="col-md-1">
+                                            <a href="#" class="btn btn-default add-scenario-inquest-validator" title="Add Scenario Inquest Validator"><span class="glyphicon glyphicon-plus-sign"></span></a>
                                         </div>
-                                    {% endfor %}
-                                </div>
+                                        <div class="col-md-11 appbundle_scenario_scenarioInquestValidators_wrapper sortable-wrapper">
+                                            {% for scenarioInquestValidator in scenarioInquest.scenarioInquestValidators %}
+                                                <div class="form-group scenario-inquest well row">
+                                                    <div class="btn-group pull-right">
+                                                        <a href="#" class="btn btn-default delete"><span class="glyphicon glyphicon-trash"></span></a>
+                                                        <a href="#" class="btn btn-default maximize"><span class="glyphicon glyphicon-chevron-down"></span></a>
+                                                    </div>
+                                                    <h4><small>Scenario Inquest Validator</small> <span>{{ scenarioInquestValidator.vars.value.validator }}</span></h4>
+                                                    <div id="{{ scenarioInquestValidator.vars.id }}" style="display: none;">
+                                                        <div class="form-group">
+                                                            {{ form_label(scenarioInquestValidator.validator) }}
+                                                            {{ form_widget(scenarioInquestValidator.validator) }}
+                                                            {{ form_errors(scenarioInquestValidator.validator) }}
+                                                        </div>
+                                                        <div class="form-group">
+                                                            {{ form_label(scenarioInquestValidator.validatorParameter) }}
+                                                            {{ form_widget(scenarioInquestValidator.validatorParameter) }}
+                                                            {{ form_errors(scenarioInquestValidator.validatorParameter) }}
+                                                        </div>
+                                                        <div class="form-group">
+                                                            {{ form_label(scenarioInquestValidator.validatorComparison) }}
+                                                            {{ form_widget(scenarioInquestValidator.validatorComparison) }}
+                                                            {{ form_errors(scenarioInquestValidator.validatorComparison) }}
+                                                        </div>
+                                                        {{ form_row(scenarioInquestValidator.validatorSortorder) }}
+                                                    </div>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                {% endif %}
                             </div>
                         </div>
-                    </div>
-                {% endfor %}
+                    {% endfor %}
+                </div>
             </div>
-        </div>
+        {% endif %}
 
         {{ form_row(edit_form._token) }}
         <input type="submit" value="Edit" />
