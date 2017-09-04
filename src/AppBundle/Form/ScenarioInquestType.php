@@ -23,11 +23,14 @@ class ScenarioInquestType extends AbstractType
                     'placeholder' => 'Choose an inquest',
                     'class' => 'AppBundle\Entity\Inquest',
                     'required' => true,
-                    'query_builder' => function(EntityRepository $entityRepository) {
+                    'attr' => [
+                        'class' => 'scenario-inquest-dropdown',
+                    ],
+                    'query_builder' => function(EntityRepository $entityRepository) use ($options) {
                         return $entityRepository
                                 ->createQueryBuilder('i')
                                 ->where('i.site = :site')
-                                ->setParameter('site', 2);
+                                ->setParameter('site', $options['attr']['data-site_id']);
                     }
                 ])
                 ->add('inquestProtocol', ChoiceType::class, [

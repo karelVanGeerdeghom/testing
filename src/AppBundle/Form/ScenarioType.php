@@ -32,6 +32,11 @@ class ScenarioType extends AbstractType
                 $form->add('scenarioInquests', CollectionType::class, [
                     'label' => 'Scenario Inquests',
                     'entry_type' => ScenarioInquestType::class,
+                    'entry_options' => [
+                        'attr' => [
+                            'data-site_id' => $site->getId()
+                        ]                        
+                    ],
                     'allow_add'    => true,
                     'allow_delete' => true,
                     'by_reference' => false
@@ -61,7 +66,7 @@ class ScenarioType extends AbstractType
     {
         $resolver->setDefaults(array(
             'data_class' => 'AppBundle\Entity\Scenario',
-            'site' => null
+            'site' => 'lala'
         ));
     }
 

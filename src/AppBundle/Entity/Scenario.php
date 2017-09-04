@@ -40,6 +40,7 @@ class Scenario
 
     /**
      * @ORM\OneToMany(targetEntity="ScenarioInquest", mappedBy="scenario", cascade={"persist"})
+     * @ORM\OrderBy({"inquestSortorder" = "ASC"})
      */
     private $scenarioInquests;
 
